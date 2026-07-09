@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+:root {
+  --bg-void: #080810;
+  --bg-surface: #0d0d1a;
+  --bg-card: rgba(255,255,255,0.03);
+  --bg-card-hover: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.07);
+  --border-bright: rgba(255,255,255,0.12);
+
+  /* Semantic execution colors */
+  --exec-blue: #3b82f6;
+  --exec-green: #10b981;
+  --exec-yellow: #f59e0b;
+  --exec-red: #ef4444;
+  --exec-purple: #a855f7;
+  --exec-orange: #f97316;
+  --exec-cyan: #06b6d4;
+
+  /* Glows */
+  --glow-blue: 0 0 20px rgba(59,130,246,0.35), 0 0 60px rgba(59,130,246,0.15);
+  --glow-green: 0 0 20px rgba(16,185,129,0.35), 0 0 60px rgba(16,185,129,0.15);
+  --glow-purple: 0 0 20px rgba(168,85,247,0.35), 0 0 60px rgba(168,85,247,0.15);
+  --glow-orange: 0 0 20px rgba(249,115,22,0.35), 0 0 60px rgba(249,115,22,0.15);
+  --glow-yellow: 0 0 20px rgba(245,158,11,0.35), 0 0 60px rgba(245,158,11,0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-void);
+  color: #e2e8f0;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(168,85,247,0.3); border-radius: 3px; }
+
+/* Glassmorphism */
+.glass {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Neon text */
+.neon-blue  { color: var(--exec-blue);   text-shadow: 0 0 10px rgba(59,130,246,0.8); }
+.neon-green { color: var(--exec-green);  text-shadow: 0 0 10px rgba(16,185,129,0.8); }
+.neon-purple{ color: var(--exec-purple); text-shadow: 0 0 10px rgba(168,85,247,0.8); }
+.neon-orange{ color: var(--exec-orange); text-shadow: 0 0 10px rgba(249,115,22,0.8); }
+.neon-yellow{ color: var(--exec-yellow); text-shadow: 0 0 10px rgba(245,158,11,0.8); }
+
+/* Animated grid background */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Execution highlight colors */
+.exec-line-blue   { background: rgba(59,130,246,0.12); border-left: 3px solid var(--exec-blue);  box-shadow: var(--glow-blue); }
+.exec-line-green  { background: rgba(16,185,129,0.12); border-left: 3px solid var(--exec-green); box-shadow: var(--glow-green); }
+.exec-line-yellow { background: rgba(245,158,11,0.12); border-left: 3px solid var(--exec-yellow); box-shadow: var(--glow-yellow); }
+.exec-line-purple { background: rgba(168,85,247,0.12); border-left: 3px solid var(--exec-purple); box-shadow: var(--glow-purple); }
+.exec-line-orange { background: rgba(249,115,22,0.12); border-left: 3px solid var(--exec-orange); box-shadow: var(--glow-orange); }
+.exec-line-red    { background: rgba(239,68,68,0.12);  border-left: 3px solid var(--exec-red);   }
+
+/* Badge */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Pulse glow animation */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+.pulse { animation: pulse-glow 2s ease-in-out infinite; }
+
+@keyframes float-up {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+.float-in { animation: float-up 0.4s ease both; }
+
+@keyframes scan-line {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100vh); }
+}
+
+/* Memory block entrance */
+@keyframes block-appear {
+  from { transform: scaleY(0); opacity: 0; transform-origin: bottom; }
+  to   { transform: scaleY(1); opacity: 1; }
+}
+.block-appear { animation: block-appear 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+
+/* Pointer arrow animation */
+@keyframes dash-flow {
+  to { stroke-dashoffset: -20; }
+}
+
+/* Terminal cursor */
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.cursor { animation: blink 1s step-end infinite; }
+
+/* Hero gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6 0%, #a855f7 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-warm {
+  background: linear-gradient(135deg, #f97316 0%, #f59e0b 50%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Button base */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; background: var(--bg-card);
+  color: #94a3b8; letter-spacing: 0.3px;
+}
+.btn:hover { background: var(--bg-card-hover); border-color: var(--border-bright); color: #e2e8f0; }
+
+.btn-primary {
+  background: rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.4);
+  color: var(--exec-blue);
+}
+.btn-primary:hover { background: rgba(59,130,246,0.25); box-shadow: var(--glow-blue); }
+
+.btn-run {
+  background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.4);
+  color: var(--exec-green); padding: 10px 24px;
+}
+.btn-run:hover { background: rgba(16,185,129,0.25); box-shadow: var(--glow-green); }
+
+/* Panel */
+.panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+}
+.panel-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-family: 'JetBrains Mono', monospace; }
+
+/* Dot indicator */
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.dot-blue   { background: var(--exec-blue);   box-shadow: 0 0 6px var(--exec-blue); }
+.dot-green  { background: var(--exec-green);  box-shadow: 0 0 6px var(--exec-green); }
+.dot-yellow { background: var(--exec-yellow); box-shadow: 0 0 6px var(--exec-yellow); }
+.dot-purple { background: var(--exec-purple); box-shadow: 0 0 6px var(--exec-purple); }
+.dot-orange { background: var(--exec-orange); box-shadow: 0 0 6px var(--exec-orange); }
+.dot-red    { background: var(--exec-red);    box-shadow: 0 0 6px var(--exec-red); }
